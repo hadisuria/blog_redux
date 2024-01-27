@@ -6,18 +6,39 @@ import {addBlogPost, editBlogPost, deleteBlogPost} from '../actions/BlogAction';
 import BlogList from '../components/BlogList';
 
 const IndexScreen = ({navigation, blogs, deleteBlogPost}) => {
+  const onCreatePress = () => {
+    console.log('onCreatePress called');
+    navigation.navigate('Create');
+  };
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <TouchableOpacity
+            onPress={() => {
+              console.log('navigate to create screen');
+              navigation.navigate('Create');
+            }}>
+            <Text style={styles.addIcon}>+</Text>
+          </TouchableOpacity>
+        );
+      },
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       {blogs.length > 0 ? null : (
         <Button
           title="Press here or  tap the + button on top right screen"
-          onPress={() => navigation.navigate('Create')}
+          onPress={onCreatePress}
         />
       )}
       <BlogList
         items={blogs}
         navigation={navigation}
-        onDelete={id => {
+        onDelete={(id) => {
           deleteBlogPost(id);
         }}
       />
@@ -25,28 +46,13 @@ const IndexScreen = ({navigation, blogs, deleteBlogPost}) => {
   );
 };
 
-IndexScreen.navigationOptions = ({navigation}) => {
-  return {
-    headerRight: () => {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Create');
-          }}>
-          <Text style={styles.addIcon}>+</Text>
-        </TouchableOpacity>
-      );
-    },
-  };
-};
-
-const mapStateToProps = state => {
-  // console.log(state);
+const mapStateToProps = (state) => {
+  console.log(state);
   const {blogs} = state;
   return {blogs};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const something = bindActionCreators(
     {
       addBlogPost,
@@ -76,4 +82,3 @@ const styles = StyleSheet.create({
 
 // eslint-disable-next-line prettier/prettier
 export default connect(mapStateToProps, mapDispatchToProps)(IndexScreen);
-// export default IndexScreen;

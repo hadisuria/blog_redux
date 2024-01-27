@@ -7,8 +7,8 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, {
   blogs: [
-    // {title: 'tist', content: 'tis', id: 1},
-    // {title: 'test2', content: 'test2 content', id: 2},
+    {title: 'tist', content: 'tis', id: 1},
+    {title: 'test2', content: 'test2 content', id: 2},
   ],
 });
 

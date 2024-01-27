@@ -6,11 +6,12 @@ import {addBlogPost, editBlogPost, deleteBlogPost} from '../actions/BlogAction';
 import BlogPostForm from '../components/BlogPostForm';
 
 const CreateScreen = props => {
+  console.log("props", props);
   return (
     <View style={{flex: 1}}>
       <BlogPostForm
         style={{flex: 1}}
-        initialValues={{title: props.blogs.title, content: props.blogs.content}}
+        initialValues={{title: props.blogs.title || '', content: props.blogs.content || ''}}
         onSubmit={(title, content) => {
           console.log('data=', title, content);
           props.addBlogPost(title, content);

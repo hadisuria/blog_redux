@@ -5,8 +5,8 @@ import {bindActionCreators} from 'redux';
 import {editBlogPost, deleteBlogPost} from '../actions/BlogAction';
 import BlogPostForm from '../components/BlogPostForm';
 
-const EditScreen = ({blogs, navigation, editBlogPost}) => {
-  const id = navigation.getParam('id');
+const EditScreen = ({blogs, navigation, editBlogPost, route}) => {
+  const id = route.params.id ?? '';
   const blogPost = blogs.find(blogPost => blogPost.id === id);
 
   //   console.log('Edit screen id: ', id);
